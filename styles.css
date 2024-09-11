@@ -20,10 +20,10 @@
   left: calc(50% - 60px);
 }
 .game-container button:hover {
-  background-color: #d62c1a;
+  background-color: #1ad6cd;
 }
 .game-container .paddle {
-  background-color: #2ecc71;
+  background-color: #cc2e40;
   width: 100px;
   height: 20px;
   position: absolute;
