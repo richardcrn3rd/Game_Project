@@ -1,35 +1,50 @@
 .game-container {
+  background-color: #ecf0f1;
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  background-color: #f0f0f0;
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  border: 2px solid #3498db;
   overflow: hidden;
 }
-
-.paddle {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  width: 120px;
-  height: 20px;
-  background-color: #3498db;
-  transform: translateX(-50%);
-}
-
-.ball {
-  position: absolute;
-  width: 20px;
-  height: 20px;
+.game-container button {
   background-color: #e74c3c;
-  border-radius: 50%;
-}
-
-.score {
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 20px;
-  color: #2c3e50;
+  top: 20px;
+  left: calc(50% - 60px);
+}
+.game-container button:hover {
+  background-color: #d62c1a;
+}
+.game-container .paddle {
+  background-color: #2ecc71;
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 50px);
+  border-radius: 5px;
+}
+@media (max-width: 600px) {
+  .game-container .paddle {
+    width: 80px;
+  }
+}
+.game-container .ball {
+  background-color: #3498db;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*# sourceMappingURL=styles.css.map */

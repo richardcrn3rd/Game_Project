@@ -1,0 +1,12 @@
+@function calculate-speed($difficulty) {
+    @if $difficulty == 'easy' {
+        @return 2px;
+    } @else if $difficulty == 'medium' {
+        @return 4px;
+    } @else if $difficulty == 'hard' {
+        @return 6px;
+    } @else {
+        @warn "Unknown difficulty level, defaulting to easy.";
+        @return 2px;
+    }
+}

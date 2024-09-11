@@ -1,38 +1,8 @@
-$background-color: #f0f0f0;
-$paddle-color: #3498db;
-$ball-color: #e74c3c;
-$score-color: #2c3e50;
+@import 'variables';
+@import 'mixins';
+@import 'functions';
+@import 'components';
 
-.game-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-color: $background-color;
-    overflow: hidden;
-}
+// $error-message: "There is an Error";
 
-.paddle {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    width: 120px;
-    height: 20px;
-    background-color: $paddle-color;
-    transform: translateX(-50%);
-}
-
-.ball {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: $ball-color;
-    border-radius: 50%;
-}
-
-.score {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 20px;
-    color: $score-color;
-}
+// @error $error-message;

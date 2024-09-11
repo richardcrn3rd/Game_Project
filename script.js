@@ -1,53 +1,60 @@
-const paddle = document.querySelector('.paddle');
-const ball = document.querySelector('.ball');
-const scoreElement = document.getElementById('score');
-let score = 0;
-let isGameOver = false;
+document.addEventListener('DOMContentLoaded', () => {
+    const paddle = document.getElementById('paddle');
+    const ball = document.getElementById('ball');
+    const startButton = document.getElementById('startButton');
+    
+    let ballSpeedX = 4;
+    let ballSpeedY = 4;
+    let gameInterval;
 
-const paddleWidth = paddle.offsetWidth;
-const ballDiameter = ball.offsetWidth;
+    const startGame = () => {
+        ball.style.top = '50%';
+        ball.style.left = '50%';
+        ballSpeedX = 4;
+        ballSpeedY = 4;
+        startButton.disabled = true;
 
-function movePaddle(event) {
-    const gameContainerWidth = document.querySelector('.game-container').offsetWidth;
-    let newLeft = event.clientX - gameContainerWidth / 2 - paddleWidth / 2;
+        gameInterval = setInterval(() => {
 
-    // Prevent paddle from moving outside the game container
-    newLeft = Math.max(0, Math.min(gameContainerWidth - paddleWidth, newLeft));
-    paddle.style.left = newLeft + 'px';
-}
+            let ballRect = ball.getBoundingClientRect();
+            let containerRect = document.querySelector('.game-container').getBoundingClientRect();
+            let paddleRect = paddle.getBoundingClientRect();
 
-function startGame() {
-    const gameContainer = document.querySelector('.game-container');
-    let ballLeft = Math.random() * (gameContainer.offsetWidth - ballDiameter);
-    let ballTop = 0;
 
-    function gameLoop() {
-        if (isGameOver) return;
-
-        ball.style.left = ballLeft + 'px';
-        ball.style.top = ballTop + 'px';
-        ballTop += 5;
-
-        if (ballTop + ballDiameter > gameContainer.offsetHeight) {
-            // Ball reached bottom
-            if (ballLeft > parseFloat(paddle.style.left) && ballLeft < parseFloat(paddle.style.left) + paddleWidth) {
-                // Ball caught by the paddle
-                score++;
-                scoreElement.textContent = score;
-                ballLeft = Math.random() * (gameContainer.offsetWidth - ballDiameter);
-                ballTop = 0;
-            } else {
-                // Game Over
-                isGameOver = true;
-                alert('Game Over! Your score is ' + score);
+            if (ballRect.top <= containerRect.top || ballRect.bottom >= containerRect.bottom) {
+                ballSpeedY = -ballSpeedY;
             }
+            if (ballRect.left <= containerRect.left || ballRect.right >= containerRect.right) {
+                ballSpeedX = -ballSpeedX;
+            }
+
+
+            if (ballRect.bottom >= paddleRect.top &&
+                ballRect.right >= paddleRect.left &&
+                ballRect.left <= paddleRect.right) {
+                ballSpeedY = -ballSpeedY;
+                ball.style.backgroundColor = getRandomColor();
+            }
+
+            ball.style.top = (ballRect.top + ballSpeedY) + 'px';
+            ball.style.left = (ballRect.left + ballSpeedX) + 'px';
+        }, 20);
+
+        document.addEventListener('mousemove', (event) => {
+            let x = event.clientX - paddle.offsetWidth / 2;
+            x = Math.max(0, Math.min(window.innerWidth - paddle.offsetWidth, x));
+            paddle.style.left = x + 'px';
+        });
+    };
+
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
         }
+        return color;
+    };
 
-        requestAnimationFrame(gameLoop);
-    }
-
-    gameLoop();
-}
-
-document.addEventListener('mousemove', movePaddle);
-startGame();
+    startButton.addEventListener('click', startGame);
+});
