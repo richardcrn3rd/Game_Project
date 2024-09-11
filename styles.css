@@ -1,0 +1,35 @@
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+
+.paddle {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 120px;
+  height: 20px;
+  background-color: #3498db;
+  transform: translateX(-50%);
+}
+
+.ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #e74c3c;
+  border-radius: 50%;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+/*# sourceMappingURL=styles.css.map */
